@@ -1,4 +1,4 @@
-/* 								
+/*
 								MIT License
 
 						Copyright (c) 2012 GameStar
@@ -22,7 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <a_samp>
+#tryinclude <open.mp>
+
+#tryinclude <YSI_Coding\y_va>
+
+#if !defined _INC_open_mp
+	#error You must include open.mp.
+#endif
+
+#if !defined _INC_y_va
+	#error You must include YSI_Coding\y_va.
+#endif
 
 #if defined fixchars_included
 	#endinput
@@ -31,63 +41,62 @@ SOFTWARE.
 
 stock Fixchar(c)
 {
-	switch (c)
- 	{
- 	    // ﬂ
-		case 223: c = 150;
+    switch (c) {
+        // √ü
+        case 223: c = 150;
 
-		// ‰/ƒ
-		case 228: c = 154;
-		case 196: c = 131;
-	    
- 	    // ·/¡
-  		case 225: c = 152;
+        // √§/√Ñ
+        case 228: c = 154;
+        case 196: c = 131;
+
+        // √°/√Å
+        case 225: c = 152;
         case 193: c = 128;
 
-		// È/…
+        // √©/√â
         case 233: c = 158;
         case 201: c = 135;
 
-        // Ì/Õ
+        // √≠/√ç
         case 237: c = 162;
         case 205: c = 139;
 
-        // Û/”
+        // √≥/√ì
         case 243: c = 166;
         case 211: c = 143;
 
-		// ı/’
-		case 245: c = 167;
+        // ≈ë/≈ê
+        case 245: c = 167;
         case 213: c = 144;
 
-		// ˆ/÷
-		case 246: c = 168;
+        // √∂/√ñ
+        case 246: c = 168;
         case 214: c = 145;
 
-		// ˙/⁄
-		case 250: c = 170;
+        // √∫/√ö
+        case 250: c = 170;
         case 218: c = 147;
 
-        // ˚/€
-		case 251: c = 171;
+        // ≈±/≈∞
+        case 251: c = 171;
         case 219: c = 148;
 
-        // ¸/‹
-		case 252: c = 172;
+        // √º/√ú
+        case 252: c = 172;
         case 220: c = 149;
-	}
+    }
 
-	return c;
+    return c;
 }
 
 /* -----------------------------------------------------------------------------------------------------------------*/
 
-stock FIXCHARS_GameTextForPlayer(playerid, const text[], time, style)
+stock FIXCHARS_GameTextForPlayer(playerid, const text[], time, style, OPEN_MP_TAGS:...)
 {
-    for(new index, character; (character = getarg(1, index)); index++)
-		setarg(1, index, Fixchar(character));
+    for (new index, character; (character = getarg(1, index)); index++)
+        setarg(1, index, Fixchar(character));
 
-	return GameTextForPlayer(playerid, text, time, style);
+    return GameTextForPlayer(playerid, text, time, style, ___(4));
 }
 
 #if defined _ALS_GameTextForPlayer
@@ -99,12 +108,12 @@ stock FIXCHARS_GameTextForPlayer(playerid, const text[], time, style)
 
 /* -----------------------------------------------------------------------------------------------------------------*/
 
-stock FIXCHARS_GameTextForAll(const text[], time, style)
+stock FIXCHARS_GameTextForAll(const text[], time, style, OPEN_MP_TAGS:...)
 {
-    for(new index, character; (character = getarg(0, index)); index++)
-		setarg(0, index, Fixchar(character));
-	
-	return GameTextForAll(text, time, style);
+    for (new index, character; (character = getarg(0, index)); index++)
+        setarg(0, index, Fixchar(character));
+
+    return GameTextForAll(text, time, style, ___(3));
 }
 
 #if defined _ALS_GameTextForAll
@@ -116,12 +125,12 @@ stock FIXCHARS_GameTextForAll(const text[], time, style)
 
 /* -----------------------------------------------------------------------------------------------------------------*/
 
-stock Text:FIXCHARS_TextDrawCreate(Float:x, Float:y, const text[])
+stock Text:FIXCHARS_TextDrawCreate(Float:x, Float:y, const text[], OPEN_MP_TAGS:...)
 {
-	for(new index, character; (character = getarg(2, index)); index++)
-		setarg(2, index, Fixchar(character));
+    for (new index, character; (character = getarg(2, index)); index++)
+        setarg(2, index, Fixchar(character));
 
-	return TextDrawCreate(x, y, text);
+    return TextDrawCreate(x, y, text, ___(3));
 }
 
 #if defined _ALS_TextDrawCreate
@@ -133,12 +142,12 @@ stock Text:FIXCHARS_TextDrawCreate(Float:x, Float:y, const text[])
 
 /* -----------------------------------------------------------------------------------------------------------------*/
 
-stock Menu:FIXCHARS_CreateMenu(const title[], columns, Float:x, Float:y, Float:col1width, Float:col2width = 0.0)
+stock Menu:FIXCHARS_CreateMenu(const title[], columns, Float:x, Float:y, Float:col1width, Float:col2width = 0.0, OPEN_MP_TAGS:...)
 {
-	for(new index, character; (character = getarg(0, index)); index++)
-		setarg(0, index, Fixchar(character));
+    for (new index, character; (character = getarg(0, index)); index++)
+        setarg(0, index, Fixchar(character));
 
-	return CreateMenu(title, columns, x, y, col1width, col2width);
+    return CreateMenu(title, columns, x, y, col1width, col2width, ___(6));
 }
 
 #if defined _ALS_CreateMenu
@@ -150,12 +159,12 @@ stock Menu:FIXCHARS_CreateMenu(const title[], columns, Float:x, Float:y, Float:c
 
 /* -----------------------------------------------------------------------------------------------------------------*/
 
-stock FIXCHARS_SetMenuColumnHeader(Menu:menuid, column, const columnheader[])
+stock FIXCHARS_SetMenuColumnHeader(Menu:menuid, column, const columnheader[], OPEN_MP_TAGS:...)
 {
-    for(new index, character; (character = getarg(2, index)); index++)
-		setarg(2, index, Fixchar(character));
+    for (new index, character; (character = getarg(2, index)); index++)
+        setarg(2, index, Fixchar(character));
 
-	return SetMenuColumnHeader(menuid, column, columnheader);
+    return SetMenuColumnHeader(menuid, column, columnheader, ___(3));
 }
 
 #if defined _ALS_SetMenuColumnHeader
@@ -167,12 +176,12 @@ stock FIXCHARS_SetMenuColumnHeader(Menu:menuid, column, const columnheader[])
 
 /* -----------------------------------------------------------------------------------------------------------------*/
 
-stock FIXCHARS_AddMenuItem(Menu:menuid, column, const menutext[])
+stock FIXCHARS_AddMenuItem(Menu:menuid, column, const menutext[], OPEN_MP_TAGS:...)
 {
-    for(new index, character; (character = getarg(2, index)); index++)
-		setarg(2, index, Fixchar(character));
-	
-	return AddMenuItem(menuid, column, menutext);
+    for (new index, character; (character = getarg(2, index)); index++)
+        setarg(2, index, Fixchar(character));
+
+    return AddMenuItem(menuid, column, menutext, columnheader, ___(3));
 }
 
 #if defined _ALS_AddMenuItem
@@ -184,12 +193,12 @@ stock FIXCHARS_AddMenuItem(Menu:menuid, column, const menutext[])
 
 /* -----------------------------------------------------------------------------------------------------------------*/
 
-stock FIXCHARS_TextDrawSetString(Text:text, const string[])
+stock FIXCHARS_TextDrawSetString(Text:text, const string[], OPEN_MP_TAGS:...)
 {
-    for(new index, character; (character = getarg(1, index)); index++)
-		setarg(1, index, Fixchar(character));
+    for (new index, character; (character = getarg(1, index)); index++)
+        setarg(1, index, Fixchar(character));
 
-	return TextDrawSetString(text,string);
+    return TextDrawSetString(text, string, ___(2));
 }
 
 #if defined _ALS_TextDrawSetString
@@ -202,14 +211,14 @@ stock FIXCHARS_TextDrawSetString(Text:text, const string[])
 /* -----------------------------------------------------------------------------------------------------------------*/
 
 #if defined CreatePlayerTextDraw
-	stock PlayerText:FIXCHARS_CreatePlayerTextDraw(playerid, Float:x, Float:y, const text[])
-	{
-		for(new index, character; (character = getarg(3, index)); index++)
-			setarg(3, index, Fixchar(character));
+stock PlayerText:FIXCHARS_CreatePlayerTextDraw(playerid, Float:x, Float:y, const text[], OPEN_MP_TAGS:...)
+{
+    for (new index, character; (character = getarg(3, index)); index++)
+        setarg(3, index, Fixchar(character));
 
-		return CreatePlayerTextDraw(playerid, x, y, text);
-	}
-	
+    return CreatePlayerTextDraw(playerid, x, y, text, ___(4));
+}
+
 	#if defined _ALS_CreatePlayerTextDraw
     #undef CreatePlayerTextDraw
 	#else
@@ -221,18 +230,18 @@ stock FIXCHARS_TextDrawSetString(Text:text, const string[])
 /* -----------------------------------------------------------------------------------------------------------------*/
 
 #if defined PlayerTextDrawSetString
-	stock FIXCHARS_PlayerTextDrawSetS(playerid, PlayerText:text, const string[])
-	{
-		for(new index, character; (character = getarg(2, index)); index++)
-			setarg(2, index, Fixchar(character));
-			
-		return PlayerTextDrawSetString(playerid,text,string);
-	}
-	
+stock FIXCHARS_PlayerTextDrawSetString(playerid, PlayerText:text, const string[], OPEN_MP_TAGS:...)
+{
+    for (new index, character; (character = getarg(2, index)); index++)
+        setarg(2, index, Fixchar(character));
+
+    return PlayerTextDrawSetString(playerid, text, string, ___(3));
+}
+
 	#if defined _ALS_PlayerTextDrawSetString
     #undef PlayerTextDrawSetString
 	#else
 	    #define _ALS_PlayerTextDrawSetString
 	#endif
-	#define PlayerTextDrawSetString FIXCHARS_PlayerTextDrawSetS
+	#define PlayerTextDrawSetString FIXCHARS_PlayerTextDrawSetString
 #endif
